@@ -1,0 +1,28 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.header__logo{
+    height: 25px;
+    object-fit: contain;  /* Fit logo for png format*/
+    margin-left: 20px;
+}
+
+.header__input{
+    display: flex;
+    align-items: center;
+    width: 40%;
+}
+
+.header__right {
+    display: flex;
+    align-items: center;
+}
+
+.header__input > input {
+    flex: 1;
+    border: none;
+}
