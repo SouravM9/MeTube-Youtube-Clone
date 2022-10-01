@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react";
 import './App.css';
 import Header from "./Header";
 import RecommendedVideos from "./RecommendedVideos";
@@ -7,6 +7,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SearchPage from './SearchPage';
 
 function App() {
+  useEffect(() => {
+    document.title = 'MeTube'; // To change the title
+  });
+
   return (
     <div className="app">
       <BrowserRouter>
@@ -32,8 +36,6 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
-
-
   );
 }
 
