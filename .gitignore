@@ -24,3 +24,13 @@ yarn-error.log*
 
 .env
 src/api.js
+
+# Local Netlify folder
+.netlify
+
+/.firebase
+
+./netlify
+
+.firebaserc
+firebase.json

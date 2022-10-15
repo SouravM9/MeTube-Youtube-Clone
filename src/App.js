@@ -7,9 +7,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SearchPage from './SearchPage';
 
 function App() {
-  useEffect(() => {
-    document.title = 'MeTube'; // To change the title
-  });
+  // useEffect(() => {
+  //   document.title = 'MeTube'; // To change the title
+  // });
 
   return (
     <div className="app">

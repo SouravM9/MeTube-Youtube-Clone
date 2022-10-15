@@ -40,12 +40,12 @@ async function getListYoutube() {
 
 function RecommendedVideos() {
 
-  const [query, setQuery] = React.useState('movie');
+  const [query, setQuery] = React.useState('Gaming');
   const [list, setList] = React.useState(null);
 
   const search = (e) => {
-    // searchYouTube(query).then(setList);  // Use this for best response
-    getListYoutube().then(setList);
+    searchYouTube(query).then(setList);  // Use this for best response
+    // getListYoutube().then(setList);
   };
 
   useEffect(() => {
@@ -75,20 +75,21 @@ function RecommendedVideos() {
               {list.map(item => (
                 <VideoCard
 
-                  // image={item.thumbnails[0].url}
-                  // title={item.title}
-                  // channel={item.author.name}
-                  // views={item.views}
-                  // timestamp={item.uploadedAt}
-                  // channelImage={item.author.bestAvatar.url}
-
-                  key={item.id.videoId}
-                  image={item.snippet.thumbnails.high.url}
-                  title={item.snippet.title}
-                  channel={item.snippet.channelTitle}
-                  views=""
-                  timestamp=""
-                  channelImage=""
+                  image={item.thumbnails[0].url}
+                  title={item.title}
+                  channel={item.author.name}
+                  views={item.views}
+                  timestamp={item.uploadedAt}
+                  channelImage={item.author.bestAvatar.url}
+                  key={item.id + item.title}
+                  
+                  // key={item.id.videoId}
+                  // image={item.snippet.thumbnails.high.url}
+                  // title={item.snippet.title}
+                  // channel={item.snippet.channelTitle}
+                  // views=""
+                  // timestamp=""
+                  // channelImage=""
                 />
               ))}
 

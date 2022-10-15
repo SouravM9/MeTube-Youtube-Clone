@@ -9,8 +9,14 @@
     background-color: white;
 }
 
+.header__left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .header__logo {
-    height: 25px;
+    height: 35px;
     object-fit: contain;
     /* Fit logo for png format*/
     margin-left: 20px;
@@ -23,11 +29,39 @@
     border: 1px solid black;
 }
 
+input[type="text"] {
+    width: 89%;
+    height: 33px;
+    padding: 0 10px;
+    color: #000;
+    border: 1px solid #BEBEBE;
+    border-radius: 2px 0 0 2px;
+    z-index: 2
+}
+
+input:focus {
+    border: 1.1px solid #1c62b9;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .4);
+}
+
 .header__inputButton {
     width: 50px !important;
     background-color: #fafafa;
     border-left: 1px solid lightgray;
     color: gray;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: center;
+    background-color: #f0f0f0;
+    z-index: 1;
+
+}
+
+.header__inputButton:hover {
+    background-color: #E4E4E4;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .15),
+        inset 0 0 2px rgba(0, 0, 0, .05);
+    transition: all .07s ease-in-out
 }
 
 .header__right {
@@ -37,6 +71,7 @@
 
 .header__icon {
     margin-right: 8px;
+    padding: 2px;
 }
 
 .header__input>input {

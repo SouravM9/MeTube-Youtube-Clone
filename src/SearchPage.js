@@ -53,8 +53,8 @@ function SearchPage() {
     
     //console.log(query);
     const search = (e) => {
-        // searchYouTube(query).then(setList);  // Use this for best response
-        getListYoutube(query).then(setList);
+        searchYouTube(query).then(setList);  // Use this for best response
+        // getListYoutube(query).then(setList);
     };
 
     useEffect(() => {
@@ -98,22 +98,22 @@ function SearchPage() {
 
                                 <VideoRow
                                     
-                                    // image={item.thumbnails[0].url}
-                                    // title={item.title}
-                                    // channel={item.author.name}
-                                    // views={item.views}
-                                    // timestamp={item.uploadedAt}
-                                    // channelImage={item.author.bestAvatar.url}
-                                    // description=""
-
-                                    key={item.id.videoId}
-                                    image={item.snippet.thumbnails.high.url}
-                                    title={item.snippet.title}
-                                    channel={item.snippet.channelTitle}
-                                    views=""
-                                    timestamp=""
-                                    channelImage=""
+                                    image={item.thumbnails[0].url}
+                                    title={item.title}
+                                    channel={item.author.name}
+                                    views={item.views}
+                                    timestamp={item.uploadedAt}
+                                    channelImage={item.author.bestAvatar.url}
                                     description=""
+
+                                    // key={item.id.videoId}
+                                    // image={item.snippet.thumbnails.high.url}
+                                    // title={item.snippet.title}
+                                    // channel={item.snippet.channelTitle}
+                                    // views=""
+                                    // timestamp=""
+                                    // channelImage=""
+                                    // description=""
 
                                 />
                                     
