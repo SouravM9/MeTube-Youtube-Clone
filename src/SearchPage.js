@@ -4,6 +4,7 @@ import TuneOutlinedIcon from '@mui/icons-material/TuneOutlined';
 import VideoRow from './VideoRow';
 import { useEffect, useState } from "react";
 import { API_KEY } from "./api.js";
+import ChannelRow from './ChannelRow';
 
 
 const url = 'https://youtube-v3-alternative.p.rapidapi.com/search?query=';
@@ -50,17 +51,6 @@ function SearchPage() {
                 <h2>FILTER</h2>
             </div>
             <hr />
-            {/* <ChannelRow
-                image="https://yt3.ggpht.com/S4VWNJnJF_21DlC_tXhDYg6jyr4E9tJMlwn6kx49HPrh8uqNnQ3vZrIoDaaW2irhhsb-lTFQKA=s176-c-k-c0x00ffffff-no-rj"
-                Channel="Sony Pictures Entertainment"
-                verified
-                subs="6.45M"
-                noOfVideos={4406}
-                description="Welcome to the official channel for Sony Pictures Entertainment."
-            />
-            <hr />
-            */}
-
             {list &&
                 (list.length === 0
                     ? <p>No results</p>
@@ -68,19 +58,34 @@ function SearchPage() {
                         <div className="s">
 
                             {list.map(item => (
-                                <a href={`https://www.youtube.com/watch?v=${item.videoId}`} target='_blank' rel='noopener noreferrer'
-                                    style={{ textDecoration: 'none', color: 'inherit' }} key={item.videoId + item.channelId}>
-                                    <VideoRow
+
+                                item.type === 'channel' ?
+                                    <ChannelRow
                                         image={item.thumbnail[item.thumbnail.length - 1].url}
-                                        title={item.title}
-                                        channel={item.channelTitle}
-                                        views={item.viewCount}
-                                        timestamp={item.publishedText ? item.publishedText : ""}
-                                        channelImage={item.channelThumbnail ? item.channelThumbnail[0].url : ""}
+                                        Channel={item.title}
+                                        verified={false}
+                                        subs={item.subscriberCount}
+                                        noOfVideos={item.videoCount ? item.videoCount : ""}
                                         description={item.description}
-                                        key={item.videoId + item.channelId}
+
                                     />
-                                </a>
+                                    :
+                                    <a href={`https://www.youtube.com/watch?v=${item.videoId}`} target='_blank' rel='noopener noreferrer'
+                                        style={{ textDecoration: 'none', color: 'inherit' }} key={item.videoId + item.channelId}>
+                                        <VideoRow
+                                            image={item.thumbnail[item.thumbnail.length - 1].url}
+                                            title={item.title}
+                                            channel={item.channelTitle}
+                                            views={item.viewCount}
+                                            timestamp={item.publishedText ? item.publishedText : ""}
+                                            channelImage={item.channelThumbnail ? item.channelThumbnail[0].url : ""}
+                                            description={item.description}
+                                            key={item.videoId + item.channelId}
+                                        />
+                                    </a>
+
+
+
                             ))}
 
                         </div>

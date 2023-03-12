@@ -1,25 +1,31 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import "./VideoRow.css"
 
-function ConvertViews(views) { 
-    if (Math.floor(views / 1000000) > 0) {
-        let v = views / 1000000;
+function ConvertViews(views) {
+    if (Math.floor(views / 1e9) > 0) {
+        let v = views / 1e9;
+        return (v.toFixed(1) + "B views");
+    }
+    else if (Math.floor(views / 1e6) > 0) {
+        let v = views / 1e6;
         return (v.toFixed(1) + "M views");
     }
-    else if (Math.floor(views / 1000) > 0) {
-        return (Math.floor(views / 1000) + "K views");
+    else if (Math.floor(views / 1e3) > 0) {
+        return (Math.floor(views / 1e3) + "K views");
     }
     else {
         return (views + " views");
     }
 }
 
+
 function VideoRow({ views, description, timestamp, channel, title, image }) {
     const [view, setView] = useState('');
 
     useEffect(() => {
         setView(ConvertViews(views));
-      }, [])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <div className='videoRow'>

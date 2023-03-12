@@ -14,7 +14,7 @@ function ChannelRow({ image, Channel, verified, subs, noOfVideos, description })
                 <h4>{Channel} {verified && <CheckCircleIcon/>} </h4>
 
                 <p>
-                {subs} subscribers • {noOfVideos} videos
+                {subs} • {noOfVideos} videos
                 </p>
                 <p>{description}</p>
             </div>
