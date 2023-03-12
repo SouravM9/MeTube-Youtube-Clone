@@ -1,64 +1,46 @@
 import React from 'react';
 import "./SearchPage.css";
 import TuneOutlinedIcon from '@mui/icons-material/TuneOutlined';
-import ChannelRow from './ChannelRow';
 import VideoRow from './VideoRow';
 import { useEffect, useState } from "react";
-import VideoCard from './VideoCard';
-import {API_KEY} from "./api.js";
+import { API_KEY } from "./api.js";
 
-// Previous
-let fetchUrl = "https://youtube-search-results.p.rapidapi.com/youtube-search/?q=";
-let videoHostUrl = "youtube-search-results.p.rapidapi.com";
- 
 
-// Use this for best response
-async function searchYouTube(q) {
-    q = encodeURIComponent(q);
-    const response = await fetch(fetchUrl + q, {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-host": videoHostUrl,
-            "x-rapidapi-key": API_KEY
-        }
-    });
-    const body = await response.json();
-    console.log(body);
-    return body.items
-        .filter(item => item.type === 'video');
-}
-
-async function getListYoutube(q) {
-    const response = await fetch('https://youtube-v31.p.rapidapi.com/search?q=' + q + '&part=snippet%2Cid&regionCode=IN&maxResults=100&order=date',
-        {
-            "method": "GET",
-            "headers": {
-                "x-rapidapi-host": 'youtube-v31.p.rapidapi.com',
-                "x-rapidapi-key": API_KEY
-            }
-        });
-    const body = await response.json();
-    console.log(body);
-    return body.items;
-}
+const url = 'https://youtube-v3-alternative.p.rapidapi.com/search?query=';
 
 function SearchPage() {
 
     let searchurl = window.location.href;
     var result = searchurl.split('/')
-    let SearchTerm = result[result.length-1];
+    let SearchTerm = result[result.length - 1];
 
-    const [query, setQuery] = React.useState(SearchTerm);
-    const [list, setList] = React.useState(null);
-    
-    //console.log(query);
-    const search = (e) => {
-        searchYouTube(query).then(setList);  // Use this for best response
-        // getListYoutube(query).then(setList);
-    };
+    const [query, setQuery] = useState(SearchTerm);
+    const [list, setList] = useState(null);
+
+    const search = () => {
+
+        setQuery(encodeURIComponent(query));
+
+        const options = {
+            method: 'GET',
+            headers: {
+                'X-RapidAPI-Key': API_KEY,
+                'X-RapidAPI-Host': 'youtube-v3-alternative.p.rapidapi.com'
+            }
+        };
+
+        fetch(url + query, options)
+            .then(res => res.json())
+            .then(json => {
+                setList(json.data)
+            })
+            .catch(err => console.error('error:' + err));
+
+    }
 
     useEffect(() => {
         search();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -77,16 +59,7 @@ function SearchPage() {
                 description="Welcome to the official channel for Sony Pictures Entertainment."
             />
             <hr />
-
-            <VideoRow
-                image="https://i.ytimg.com/vi/JfVOs4VSpmA/maxresdefault.jpg"
-                title="SPIDER-MAN: NO WAY HOME-Offical Trailer(HD)"
-                channel="Sony Pictures Entertainment"
-                views="77M views"
-                timestamp="10 months ago"
-                channelImage="https://yt3.ggpht.com/S4VWNJnJF_21DlC_tXhDYg6jyr4E9tJMlwn6kx49HPrh8uqNnQ3vZrIoDaaW2irhhsb-lTFQKA=s176-c-k-c0x00ffffff-no-rj"
-                description="We started getting visistors... from every universe. Watch the official trailer for #SpiderManNoWayHome"
-            />  */}
+            */}
 
             {list &&
                 (list.length === 0
@@ -97,26 +70,16 @@ function SearchPage() {
                             {list.map(item => (
 
                                 <VideoRow
-                                    
-                                    image={item.thumbnails[0].url}
+                                    image={item.thumbnail[item.thumbnail.length - 1].url}
                                     title={item.title}
-                                    channel={item.author.name}
-                                    views={item.views}
-                                    timestamp={item.uploadedAt}
-                                    channelImage={item.author.bestAvatar.url}
-                                    description=""
-
-                                    // key={item.id.videoId}
-                                    // image={item.snippet.thumbnails.high.url}
-                                    // title={item.snippet.title}
-                                    // channel={item.snippet.channelTitle}
-                                    // views=""
-                                    // timestamp=""
-                                    // channelImage=""
-                                    // description=""
-
+                                    channel={item.channelTitle}
+                                    views={item.viewCount}
+                                    timestamp={item.publishedText ? item.publishedText : ""}
+                                    channelImage={item.channelThumbnail ? item.channelThumbnail[0].url : ""}
+                                    description={item.description}
+                                    key={item.videoId + item.channelId}
                                 />
-                                    
+
                             ))}
 
                         </div>

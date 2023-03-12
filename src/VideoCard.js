@@ -21,6 +21,7 @@ function VideoCard({ image, title, channel, views, timestamp, channelImage }) {
 
     useEffect(() => {
         setView(ConvertViews(views));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [])
 
     return (
