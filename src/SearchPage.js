@@ -68,18 +68,19 @@ function SearchPage() {
                         <div className="s">
 
                             {list.map(item => (
-
-                                <VideoRow
-                                    image={item.thumbnail[item.thumbnail.length - 1].url}
-                                    title={item.title}
-                                    channel={item.channelTitle}
-                                    views={item.viewCount}
-                                    timestamp={item.publishedText ? item.publishedText : ""}
-                                    channelImage={item.channelThumbnail ? item.channelThumbnail[0].url : ""}
-                                    description={item.description}
-                                    key={item.videoId + item.channelId}
-                                />
-
+                                <a href={`https://www.youtube.com/watch?v=${item.videoId}`} target='_blank' rel='noopener noreferrer'
+                                    style={{ textDecoration: 'none', color: 'inherit' }} key={item.videoId + item.channelId}>
+                                    <VideoRow
+                                        image={item.thumbnail[item.thumbnail.length - 1].url}
+                                        title={item.title}
+                                        channel={item.channelTitle}
+                                        views={item.viewCount}
+                                        timestamp={item.publishedText ? item.publishedText : ""}
+                                        channelImage={item.channelThumbnail ? item.channelThumbnail[0].url : ""}
+                                        description={item.description}
+                                        key={item.videoId + item.channelId}
+                                    />
+                                </a>
                             ))}
 
                         </div>

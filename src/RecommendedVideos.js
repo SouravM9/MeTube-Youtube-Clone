@@ -20,11 +20,11 @@ function RecommendedVideos() {
 
   const getData = () => {
     fetch(url, options)
-    .then(res => res.json())
-    .then((json) => {
-      setList(json.data);
-    })
-    .catch(err => console.error('error:' + err));
+      .then(res => res.json())
+      .then((json) => {
+        setList(json.data);
+      })
+      .catch(err => console.error('error:' + err));
   }
 
   useEffect(() => {
@@ -43,15 +43,19 @@ function RecommendedVideos() {
             <div className="recommendedVideos__videos">
 
               {list.map(item => (
-                <VideoCard
-                  image={item.thumbnail[item.thumbnail.length - 1].url}
-                  title={item.title}
-                  channel={item.channelTitle}
-                  views={item.viewCount}
-                  timestamp={item.publishedText}
-                  channelImage={item.channelThumbnail[0].url}
-                  key={item.videoId + item.channelId}
-                />
+                <a href={`https://www.youtube.com/watch?v=${item.videoId}`} target='_blank' rel='noopener noreferrer'
+                  style={{ textDecoration: 'none', color: 'inherit' }} key={item.videoId + item.channelId}>
+                  <VideoCard
+                    image={item.thumbnail[item.thumbnail.length - 1].url}
+                    title={item.title}
+                    channel={item.channelTitle}
+                    views={item.viewCount}
+                    timestamp={item.publishedText}
+                    channelImage={item.channelThumbnail[0].url}
+                    key={item.videoId + item.channelId}
+                  />
+                </a>
+
               ))}
 
             </div>
@@ -59,7 +63,7 @@ function RecommendedVideos() {
         )
       }
 
-    </div>
+    </div >
   )
 }
 
